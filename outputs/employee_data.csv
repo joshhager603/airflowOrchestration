@@ -1,4 +1,4 @@
-Employee Id,Name,Age,Department,Date of Joining,Years of Experience,Country,Salary,Performance Rating
+employee_id,name,age,department,date_of_joining,years_of_experience,country,salary,performance_rating
 1,Matthew Hudson,50,Operations,2021-01-22,24,Vorastria,70217,Low Performers
 2,Richard Arroyo,36,Operations,2021-12-19,12,Xanthoria,72990,Average Performers
 3,Carol Goodwin,30,Customer Support,2010-03-11,7,Glarastan,95664,Top Performers

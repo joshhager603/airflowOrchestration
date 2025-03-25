@@ -75,37 +75,37 @@ def clean_data() -> pd.DataFrame:
     df = pd.read_sql(f'SELECT * FROM {RAW_DATA_TABLE_NAME}', engine)
 
     # 1. remove duplicate entries based on Employee Id column
-    df = df.drop_duplicates(subset=['Employee Id'])
+    df = df.drop_duplicates(subset=['employee_id'])
 
     # 2. remove any rows with missing entries
     df = df.dropna()
 
     # 3. fix YYYY/MM/DD formatting issues, to YYYY-MM-DD
-    df['Date of Joining'] = pd.to_datetime(df['Date of Joining'])
-    df['Date of Joining'] = df['Date of Joining'].dt.strftime('%Y-%m-%d')
+    df['date_of_joining'] = pd.to_datetime(df['date_of_joining'])
+    df['date_of_joining'] = df['date_of_joining'].dt.strftime('%Y-%m-%d')
 
     # 4. Fix non-compliant entries in Department column
-    df['Department'] = df['Department'].replace(DEPARTMENT_CORRECTIONS)
-    manual_column_correct(df, 'Department', DEPARTMENT_GROUP)
+    df['department'] = df['department'].replace(DEPARTMENT_CORRECTIONS)
+    manual_column_correct(df, 'department', DEPARTMENT_GROUP)
 
     # 5. Fix non-compliant entries in Country column
-    df['Country'] = df['Country'].str.capitalize()
-    df['Country'] = df['Country'].replace(COUNTRY_CORRECTIONS)
-    manual_column_correct(df, 'Country', COUNTRY_GROUP)
+    df['country'] = df['country'].str.capitalize()
+    df['country'] = df['country'].replace(COUNTRY_CORRECTIONS)
+    manual_column_correct(df, 'country', COUNTRY_GROUP)
 
     # 6. Fix non-compliant entries in Performance Rating column
-    df['Performance Rating'] = df['Performance Rating'].replace(DEPARTMENT_CORRECTIONS)
-    manual_column_correct(df, 'Performance Rating', PERFORMANCE_RATING_GROUP)
+    df['performance_rating'] = df['performance_rating'].replace(DEPARTMENT_CORRECTIONS)
+    manual_column_correct(df, 'performance_rating', PERFORMANCE_RATING_GROUP)
 
     # 7. confirm all types are correct
-    df["Employee Id"] = df["Employee Id"].astype(int)
-    df["Name"] = df["Name"].astype(str)
-    df["Age"] = df["Age"].astype(int)
-    df["Department"] = df["Department"].astype(str)
-    df['Date of Joining'] = pd.to_datetime(df['Date of Joining'])
-    df['Years of Experience'] = df["Years of Experience"].astype(int)
-    df['Country'] = df["Country"].astype(str)
-    df['Salary'] = df["Salary"].astype(int)
-    df['Performance Rating'] = df["Performance Rating"].astype(str)
+    df["employee_id"] = df["employee_id"].astype(int)
+    df["name"] = df["name"].astype(str)
+    df["age"] = df["age"].astype(int)
+    df["department"] = df["department"].astype(str)
+    df['date_of_joining'] = pd.to_datetime(df['date_of_joining'])
+    df['years_of_experience'] = df["years_of_experience"].astype(int)
+    df['country'] = df["country"].astype(str)
+    df['salary'] = df["salary"].astype(int)
+    df['performance_rating'] = df["performance_rating"].astype(str)
 
     return df
