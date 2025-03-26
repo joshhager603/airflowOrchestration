@@ -11,6 +11,7 @@ if PROJECT_DIR not in sys.path:
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
+from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 import smtplib
 from email.mime.text import MIMEText
@@ -71,6 +72,7 @@ dag = DAG(
     description='A DAG to run an employee data pipeline',
     schedule_interval='@daily'
 )
+
 
 # task definitions
 load_raw_data_task = PythonOperator(
