@@ -1,5 +1,8 @@
 # create python venv
 python3.11 -m venv .venv
+source ./.venv/bin/activate
+
+# install required packages
 pip3 install -r requirements.txt
 
 # init airflow
