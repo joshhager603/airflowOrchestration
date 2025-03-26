@@ -3,7 +3,7 @@ python3.10 -m venv .venv
 source ./.venv/bin/activate
 
 # install required packages
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 
 # init airflow
 airflow db init
