@@ -3,6 +3,7 @@ import os
 # ------- Project Directory -------
 PROJECT_DIR = '/Users/joshhager/josh/classes/csds397/indivAssign5'
 
+# needed so Python has access to this directory when running the dag from the ~airflow/dags folder
 if PROJECT_DIR not in sys.path:
     sys.path.insert(0, PROJECT_DIR)
 
@@ -21,18 +22,18 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(PROJECT_DIR, '.env'))
 
-# Email configuration
+# email configuration
 SMTP_SERVER = "smtp.gmail.com"  
 SMTP_PORT = 587
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
 RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")
 
-
 def send_email(context):
+    """Sends an email given a task context."""
 
     try:
-        # Create the email
+        # create the email
         task_instance = context.get('task_instance')
         subject = f"Task {task_instance.task_id} failed in DAG {task_instance.dag_id}"
         body = f"The task failed. Here's the error details:\n\n{str(context)}"
@@ -43,9 +44,9 @@ def send_email(context):
         msg["Subject"] = subject
         msg.attach(MIMEText(body, "plain"))
 
-        # Connect to the SMTP server and send the email
+        # connect to the SMTP server and send the email
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()  # Upgrade the connection to secure
+        server.starttls()  # upgrade the connection to secure
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
         server.sendmail(SENDER_EMAIL, RECIPIENT_EMAIL, msg.as_string())
         server.quit()
@@ -54,6 +55,7 @@ def send_email(context):
     except Exception as e:
         print(f"Failed to send email: {e}")
 
+# default settings for the dag
 default_args = { 
     'owner': 'admin',
     'start_date': datetime(2025, 3, 25),
@@ -62,6 +64,7 @@ default_args = {
     'on_failure_callback': send_email,
 }
 
+# dag definition
 dag = DAG(
     'employee_data_dag',
     default_args=default_args,
@@ -69,6 +72,7 @@ dag = DAG(
     schedule_interval='@daily'
 )
 
+# task definitions
 load_raw_data_task = PythonOperator(
     task_id='load_raw_data_task', 
     python_callable=load_raw_data,
@@ -139,6 +143,7 @@ with open(os.path.join(PROJECT_DIR, 'scripts/6_employees_per_department.sql')) a
         dag=dag
     )
 
+# set the task dependencies
 load_raw_data_task >> clean_data_task
 clean_data_task >> avg_salary_by_dept_task
 clean_data_task >> avg_salary_by_yoe_task

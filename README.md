@@ -4,7 +4,7 @@
 ## Description
 This repository holds the code to run a data pipeline on a set of employee data. The pipeline includes ingestion, cleaning, and transformation. Data is stored in a PostgreSQL database, and tasks are orchestrated using Airflow.
 
-## Pre-requisites
+## Prerequisites
 To run the code in this repository, you must:
 
 1. Have an installation of **Python3.11** on your machine (https://www.python.org/downloads/).
@@ -41,6 +41,6 @@ To run the code in this repository, you must:
    ```
 8. Run the `airflow scheduler` command to start the Airflow scheduler.
 9. In a different terminal, run the `airflow webserver` command to start the Airflow webserver UI.
-10. In a browser, navigate to localhost:8080 to view DAG status through the Airflow UI.
+10. In a browser, navigate to localhost:8080 to view DAG status through the Airflow UI. For this project, the default username and password are "admin" and "admin".
 
 
