@@ -9,7 +9,7 @@ COUNTRY_GROUP = ['Drivania', 'Glarastan', 'Xanthoria', 'Velronia', 'Mordalia',
                  'Vorastria', 'Luronia', 'Tavlora', 'Zorathia', 'Hesperia']
 
 PERFORMANCE_RATING_GROUP = ['Average Performers', 'High Performers', 
-                            'Low Performers', 'Top Performers', 'Poor Performers']
+                            'Low Performers']
 
 DEPARTMENT_GROUP = ['Marketing', 'R&D', 'Legal', 'HR', 'IT', 'Operations', 
                     'Sales', 'Customer Support', 'Finance', 'Logistics']
@@ -94,7 +94,7 @@ def clean_data() -> pd.DataFrame:
     manual_column_correct(df, 'country', COUNTRY_GROUP)
 
     # 6. Fix non-compliant entries in Performance Rating column
-    df['performance_rating'] = df['performance_rating'].replace(DEPARTMENT_CORRECTIONS)
+    df['performance_rating'] = df['performance_rating'].replace(PERFORMANCE_RATING_CORRECTIONS)
     manual_column_correct(df, 'performance_rating', PERFORMANCE_RATING_GROUP)
 
     # 7. confirm all types are correct
