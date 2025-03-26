@@ -9,4 +9,4 @@ def create_sqlalchemy_engine(postgres_user=POSTGRES_USER,
                              postgres_port=POSTGRES_PORT, 
                              db_name=DB_NAME) -> Engine:
     return sqlalchemy.create_engine(
-        f'postgresql://{POSTGRES_USER}:{POSTGRES_PASS}@{POSTGRES_HOST}:{POSTGRES_PORT}/{DB_NAME}')
+        f'postgresql://{postgres_user}:{postgres_pass}@{postgres_host}:{postgres_port}/{db_name}')
