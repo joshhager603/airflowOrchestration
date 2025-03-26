@@ -28,7 +28,7 @@ mkdir -p $AIRFLOW_DAG_PATH
 cp employee_data_dag.py ~/airflow/dags
 
 # create the needed database in postgres
-python3 scripts/create_database.py
+python3 create_database_setup.py
 
 # create a .env file
 touch .env

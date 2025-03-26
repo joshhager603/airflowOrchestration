@@ -27,3 +27,6 @@ def create_database():
         connection.close()
     except psycopg2.Error as e:
         print("An error occurred:", e)
+
+if __name__ == '__main__':
+    create_database()
