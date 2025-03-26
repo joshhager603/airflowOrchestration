@@ -1,6 +1,6 @@
 # create python venv
 python3.11 -m venv .venv
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # init airflow
 airflow db init

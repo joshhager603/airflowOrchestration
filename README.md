@@ -15,7 +15,7 @@ To run the code in this repository, you must:
 1. Clone this git repo to your machine using: 
    
     ```
-    git clone https://github.com/joshhager603/dataTransformationDBT.git
+    git clone https://github.com/joshhager603/airflowOrchestration.git
     ```
 2. In a terminal, `cd` into the repo you just cloned.
 3. In the file `scripts/constants.py`, change the `POSTGRES_USER` and `POSTGRES_PASS` variables to the username and password you use for PostgreSQL on this machine. You may also need to change `POSTGRES_HOST` and `POSTGRES_PORT` if you have changed these from the default.
